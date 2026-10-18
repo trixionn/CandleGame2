@@ -1,0 +1,153 @@
+{
+  "scenes": {
+    "main_menu": {
+      "main_font": {
+        "type": "font",
+        "path": "assets/fonts/Pixelta.ttf",
+        "size": 110
+      },
+      "bg": {
+        "type": "image",
+        "original": true,
+        "path": "assets/backgrounds/autumn/8/2304x1296.png",
+        "scale_factor": 0
+      },
+      "buttons_sheet": {
+        "type": "sheet",
+        "original": true,
+        "path": "assets/sprites/gui/Buttons.png"
+      },
+      "button_play": {
+        "type": "image",
+        "original": false,
+        "origin": "buttons_sheet",
+        "frames": [[13, 274, 56, 12], [93, 274, 56, 12], [173, 290, 56, 12], [253, 290, 56, 12]],
+        "names": ["static", "pressed", "hovered", "hovered_pressed"],
+        "scale_factor": 6
+      },
+      "button_settings": {
+        "type": "image",
+        "original": false,
+        "origin": "buttons_sheet",
+        "frames": [[13, 306, 56, 12], [93, 306, 56, 12], [173, 322, 56, 12], [253, 322, 56, 12]],
+        "names": ["static", "pressed", "hovered", "hovered_pressed"],
+        "scale_factor": 6
+      },
+      "button_quit": {
+        "type": "image",
+        "original": false,
+        "origin": "buttons_sheet",
+        "frames": [[13, 402, 56, 12], [93, 402, 56, 12], [173, 418, 56, 12], [253, 418, 56, 12]],
+        "names": ["static", "pressed", "hovered", "hovered_pressed"],
+        "scale_factor": 6
+      }
+    },
+    "overworld": {
+      "regular_font": {
+        "type": "font",
+        "path": "assets/fonts/Pixelta.ttf",
+        "size": 30
+      },
+      "bg": {
+        "type": "image",
+        "original": true,
+        "path": "assets/backgrounds/forestbattlebg/game_background_1/game_background_1.png",
+        "scale_factor": 0
+      }
+    }
+  },
+  "player": {
+    "lvl1": {
+      "walk": {
+        "path": "assets/sprites/player/Swordsman_lvl1/With_shadow/Swordsman_lvl1_Walk_with_shadow.png",
+        "rows": 4,
+        "columns": 6,
+        "names": ["down", "left", "right", "up"],
+        "amount": [6, 6, 6, 6],
+        "scale_factor": 4
+      },
+      "idle": {
+        "path": "assets/sprites/player/Swordsman_lvl1/With_shadow/Swordsman_lvl1_Idle_with_shadow.png",
+        "rows": 4,
+        "columns": 12,
+        "names": ["down", "left", "right", "up"],
+        "amount": [12, 12, 12, 4],
+        "scale_factor": 4
+      }
+    }
+  },
+  "levels": {
+    "level1": {
+      "0 0": {
+        "bounds": [[null, null], [0.2, 1]],
+        "assets": {
+          "bg": {
+            "name": "fourest.png",
+            "type": "image",
+            "scale_factor": 0
+          }
+        }
+      },
+      "1 0": {
+        "bounds": [[null, null], [0.2, 1]],
+        "assets": {
+          "bg": {
+            "name": "highrest.png",
+            "type": "image",
+            "scale_factor": 0
+          }
+        }
+      },
+      "2 0": {
+        "bounds": [[null, null], [null, 1]],
+        "assets": {
+          "bg": {
+            "name": "tallfest.png",
+            "type": "image",
+            "scale_factor": 0
+          }
+        }
+      },
+      "2 -1": {
+        "bounds": [[null, null], [0.2, null]],
+        "assets": {
+          "bg": {
+            "name": "scaryfest.png",
+            "type": "image",
+            "scale_factor": 0
+          }
+        }
+      },
+      "3 0": {
+        "bounds": [[null, 1], [0.2, null]],
+        "assets": {
+          "bg": {
+            "name": "duskland.png",
+            "type": "image",
+            "scale_factor": 0
+          }
+        }
+      },
+      "3 1": {
+        "bounds": [[0, 1], [null, 1]],
+        "assets": {
+          "bg": {
+            "name": "bluefest.png",
+            "type": "image",
+            "scale_factor": 0
+          }
+        }
+      },
+      "-1 0": {
+        "bounds": [[0, null], [0.2, 1]],
+        "assets": {
+          "bg": {
+            "name": "riverfest.png",
+            "type": "image",
+            "scale_factor": 0
+          }
+        }
+      }
+    }
+  }
+}
