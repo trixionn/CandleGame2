@@ -1,7 +1,10 @@
 from math import inf
+import logging
 
 from renderer import Renderer
 from player.entity import Player
+
+logger = logging.getLogger(__name__)
 
 
 class LevelMap:
@@ -28,6 +31,9 @@ class LevelMap:
 			self.change_sector(bound)
 
 	def player_out_of_bounds(self) -> str | None:
+		"""checks if the player is out of current sector's bounds.
+		Returns crossed bound, else None."""
+
 		pos = self.player_model.get_pos()
 		if pos[0] < self.screen_bounds[0][0]:
 			return 'left'
@@ -56,6 +62,9 @@ class LevelMap:
 		self.player_model.set_bounds(*self.bounds)
 
 	def get_absolute_bounds(self, relative_bounds):
+		"""bounds default to [0, 1] initially,
+		this function returns absolute values for the current size of the screen."""
+
 		xbounds = relative_bounds[0]
 		ybounds = relative_bounds[1]
 
@@ -72,23 +81,29 @@ class LevelMap:
 		return (xbounds_min, xbounds_max), (ybounds_min, ybounds_max)
 
 	def change_sector(self, direction):
+		"""moves player accordingly to opposite bound of a sector, also sets variables."""
+
+		logger.debug(f'Player moves in {direction}')
 		match direction:
 			case 'left':
 				self.sectorx -= 1
-				self.player_model.rect.centerx = self.screen_bounds[0][1] - 1
+				self.player_model.set_pos(right=self.screen_bounds[0][1])
 			case 'right':
 				self.sectorx += 1
-				self.player_model.rect.centerx = self.screen_bounds[0][0] + 1
+				self.player_model.set_pos(left=self.screen_bounds[0][0])
 			case 'top':
 				self.sectory -= 1
-				self.player_model.rect.centery = self.screen_bounds[1][1] - 1
+				self.player_model.set_pos(bottom=self.screen_bounds[1][1])
 			case 'bottom':
 				self.sectory += 1
-				self.player_model.rect.centery = self.screen_bounds[1][0] + 1
+				self.player_model.set_pos(top=self.screen_bounds[1][0])
 
 		self.sector = self.assets[self.current_level][self.sectorx][self.sectory]
 		self.bounds = self.get_absolute_bounds(self.sector['_bounds'])
 		self.player_model.set_bounds(*self.bounds)
+
+		logger.debug(f'Player new sector {self.sector}, bounds {self.bounds}')
+
 
 	def get_current_bounds(self):
 		return (

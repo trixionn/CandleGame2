@@ -1,4 +1,6 @@
 import pygame as pg
+
+import debug
 from engine import GameEngine
 
 
@@ -12,5 +14,6 @@ class App:
 
 
 if __name__ == '__main__':
+	debug.configure(True)
 	app = App()
 	app.run()

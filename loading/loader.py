@@ -91,6 +91,10 @@ class Loader:
 			)
 			self.player[anim_name] = anim
 
+			# TODO: Move hitbox information into its own dedicated place.
+			hitbox = list(map(lambda _: _ * anim_json['scale_factor'], anim_json['hitbox']))
+			self.player[anim_name]['hitbox'] = hitbox
+
 	def load_level(self, level_name: str, level_json) -> dict:
 		sectors = dict()
 

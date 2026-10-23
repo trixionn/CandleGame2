@@ -1,5 +1,6 @@
 import pygame as pg
 
+import debug
 from eventbus import EventBus
 from controls.binds import KeyBinds
 
@@ -19,6 +20,7 @@ class Handler:
 			case pg.KEYDOWN:
 				self.ebus.emit('keydown', key=e.key)
 				self.emit_movement(e.key, True)
+				self.check_debug(e.key)
 			case pg.KEYUP:
 				self.ebus.emit('keyup', key=e.key)
 				self.emit_movement(e.key, False)
@@ -40,3 +42,13 @@ class Handler:
 
 		self.keys = pg.key.get_pressed()
 		pass
+
+	@staticmethod
+	def check_debug(key):
+		match key:
+			case pg.K_F1:
+				debug.flags.show_rects = not debug.flags.show_rects
+			case pg.K_F2:
+				debug.flags.show_hitboxes = not debug.flags.show_hitboxes
+			case pg.K_F3:
+				debug.flags.show_fps = not debug.flags.show_fps

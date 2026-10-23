@@ -1,5 +1,3 @@
-import pygame as pg
-
 from scenes.main_menu import MainMenu
 from scenes.overworld import Overworld
 

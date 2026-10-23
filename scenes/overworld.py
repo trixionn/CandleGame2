@@ -1,5 +1,3 @@
-import pygame as pg
-
 from scenes.scene import Scene
 from eventbus import EventBus
 from player.entity import Player
@@ -37,6 +35,3 @@ class Overworld(Scene):
 		self.level_map.draw_frame()
 		self.interface.draw()
 		self.player.draw()
-
-		# temporary hitbox render
-		pg.draw.rect(self.renderer._screen, 'green', self.player.model.rect, width=2)

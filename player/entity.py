@@ -11,7 +11,7 @@ class Player:
 	def __init__(self, ebus: EventBus, anims, renderer: Renderer):
 		self.anims = anims
 		self.model = PlayerModel(self.anims, ebus)
-		self.view = PlayerView(self.model, self.anims)
+		self.view = PlayerView(self.model, self.anims, renderer)
 		self.renderer = renderer
 
 	def update(self, dt):
@@ -19,4 +19,5 @@ class Player:
 		self.view.update(dt)
 
 	def draw(self):
-		self.renderer.blit(self.view.get_frame(), self.model.get_rect())
+		self.view.draw()
+		self.view.debug_draw()

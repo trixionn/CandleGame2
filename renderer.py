@@ -19,6 +19,9 @@ class Renderer:
 	def blit(self, surf: pg.Surface, rect: pg.Rect | tuple = (0, 0)):
 		self._screen.blit(surf, rect)
 
+	def blit_rect(self, color, rect: pg.Rect, **kwargs):
+		pg.draw.rect(self._screen, color, rect, **kwargs)
+
 	def blits(self, objects: list):
 		for obj in objects:
 			self.blit(obj[0], obj[1])

@@ -64,6 +64,7 @@
         "columns": 6,
         "names": ["down", "left", "right", "up"],
         "amount": [6, 6, 6, 6],
+        "hitbox": [23, 23, 15, 20],
         "scale_factor": 4
       },
       "idle": {
@@ -72,6 +73,7 @@
         "columns": 12,
         "names": ["down", "left", "right", "up"],
         "amount": [12, 12, 12, 4],
+        "hitbox": [23, 23, 15, 20],
         "scale_factor": 4
       }
     }
@@ -109,7 +111,7 @@
         }
       },
       "2 -1": {
-        "bounds": [[null, null], [0.2, null]],
+        "bounds": [[0, 1], [0.2, null]],
         "assets": {
           "bg": {
             "name": "scaryfest.png",

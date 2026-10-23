@@ -1,5 +1,4 @@
 import pygame as pg
-from math import inf
 
 from eventbus import EventBus
 from player.utils import Direction
@@ -9,9 +8,19 @@ class PlayerModel:
 	MOVE_SPEED = 300
 	DEFAULT_DIRECTION = Direction.LEFT
 
-	def __init__(self, anims: dict[str, dict[str, list[pg.Surface]]], ebus: EventBus):
+	def __init__(self, anims: dict[str, dict[str, list[pg.Surface] | list[int]]], ebus: EventBus):
 		self.ref_surf = anims['walk'][PlayerModel.DEFAULT_DIRECTION][0]
 		self.rect: pg.Rect = self.ref_surf.get_rect()
+
+		if anims['walk'].get('hitbox'):
+			offsetx, offsety, width, height = anims['walk']['hitbox']
+			self.hitbox = pg.Rect(
+				self.rect.left + offsetx, self.rect.top + offsety,
+				width, height)
+			self.offsetx, self.offsety = offsetx, offsety
+		else:
+			self.hitbox = self.rect
+			self.offsetx, self.offsety = 0, 0
 
 		self.speedx = 0
 		self.speedy = 0
@@ -26,10 +35,15 @@ class PlayerModel:
 		return self.rect
 
 	def get_pos(self):
-		return self.rect.midbottom
+		return self.hitbox.center
 
 	def set_pos(self, **pos):
-		self.rect = self.ref_surf.get_rect(**pos)
+		for key, val in pos.items():
+			setattr(self.hitbox, key, val)
+		self._update_rect_pos()
+
+	def _update_rect_pos(self):
+		self.rect.topleft = self.hitbox.left - self.offsetx, self.hitbox.top - self.offsety
 
 	def set_bounds(self, xbounds, ybounds):
 		self.xbounds = xbounds
@@ -37,17 +51,17 @@ class PlayerModel:
 
 	def update(self, dt):
 		self.move(dt)
+		self._update_rect_pos()
 
 	def move(self, dt):
-		# print(self.rect.x, self.xbounds)
-		newx = self.rect.left + self.speedx * dt
-		newy = self.rect.top + self.speedy * dt
+		newx = self.hitbox.left + self.speedx * dt
+		newy = self.hitbox.top + self.speedy * dt
 
-		if self.xbounds[0] < newx and newx + self.rect.width < self.xbounds[1]:
-			self.rect.left = newx
+		if self.xbounds[0] < newx and newx + self.hitbox.width < self.xbounds[1]:
+			self.hitbox.left = newx
 
-		if self.ybounds[0] < newy and newy + self.rect.height < self.ybounds[1]:
-			self.rect.top = newy
+		if self.ybounds[0] < newy and newy + self.hitbox.height < self.ybounds[1]:
+			self.hitbox.top = newy
 
 	def on_move(self, **data):
 		if data['keydown']:
